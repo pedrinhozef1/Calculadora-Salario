@@ -33,35 +33,39 @@ class Funcionario{
     }
 
     calculaInss(salarioBruto: number): number{
-        if (salarioBruto <= 1100){
+        if (salarioBruto <= 1212){
             this.funcionario.faixaInss = 0.075;
             this.funcionario.descontoInss = salarioBruto * this.funcionario.faixaInss;
         }
-        if (salarioBruto >= 1100.01 && salarioBruto <= 2203.48){
+        if (salarioBruto >= 1212.01 && salarioBruto <= 2427.35){
             this.funcionario.faixaInss = 0.09;
 
-            this.funcionario.descontoInss = 1100 * 0.075; 
-            this.funcionario.descontoInss = this.funcionario.descontoInss + ((salarioBruto - 1100) * this.funcionario.faixaInss);
+            this.funcionario.descontoInss = 1212 * 0.075; 
+            this.funcionario.descontoInss = this.funcionario.descontoInss + ((salarioBruto - 1212) * this.funcionario.faixaInss);
         }
-        if (salarioBruto >= 2203.49 && salarioBruto <= 3305.22){
+        if (salarioBruto >= 2427.36 && salarioBruto <= 3641.03){
             this.funcionario.faixaInss = 0.12;
 
-            this.funcionario.descontoInss = 1100 * 0.075; 
-            this.funcionario.descontoInss = this.funcionario.descontoInss + (2203.48 - 1100) * 0.09;
-            this.funcionario.descontoInss = this.funcionario.descontoInss + ((salarioBruto - 2203.48) * this.funcionario.faixaInss);
+            this.funcionario.descontoInss = 1212 * 0.075; 
+            this.funcionario.descontoInss = this.funcionario.descontoInss + (2427.36 - 1212) * 0.09;
+            this.funcionario.descontoInss = this.funcionario.descontoInss + ((salarioBruto - 2427.36) * this.funcionario.faixaInss);
         }
-        if (salarioBruto >= 3305.23 && salarioBruto <= 6433.57){
+        if (salarioBruto >= 3641.04 && salarioBruto <= 7087.22){
             this.funcionario.faixaInss = 0.14;
 
-            this.funcionario.descontoInss = 1100 * 0.075; 
-            this.funcionario.descontoInss = this.funcionario.descontoInss + (2203.48 - 1100) * 0.09;
-            this.funcionario.descontoInss = this.funcionario.descontoInss + (3305.22 - 2203.48) * 0.12;
-            this.funcionario.descontoInss = this.funcionario.descontoInss + ((salarioBruto - 3302.22) * this.funcionario.faixaInss);
+            this.funcionario.descontoInss = 1212 * 0.075; 
+            this.funcionario.descontoInss = this.funcionario.descontoInss + (2427.36 - 1212) * 0.09;
+            this.funcionario.descontoInss = this.funcionario.descontoInss + (3641.23 - 2427.36) * 0.12;
+            this.funcionario.descontoInss = this.funcionario.descontoInss + ((salarioBruto - 3641.03) * this.funcionario.faixaInss);
         }
 
-        if (salarioBruto >= 6433.58){
-            this.funcionario.faixaInss = 0.14;
-            this.funcionario.descontoInss = 751.96;
+        if (salarioBruto >=  7087.23){
+            this.funcionario.descontoInss = 1212 * 0.075; 
+            
+            this.funcionario.descontoInss = 1212 * 0.075; 
+            this.funcionario.descontoInss = this.funcionario.descontoInss + (2427.36 - 1212) * 0.09;
+            this.funcionario.descontoInss = this.funcionario.descontoInss + (3641.23 - 2427.36) * 0.12;
+            this.funcionario.descontoInss = this.funcionario.descontoInss + (7087.22) * 0.14;
         }
         return this.funcionario.descontoInss;
     }
@@ -106,7 +110,7 @@ const funcionario = new Funcionario();
 function principal(nome: string, salario_bruto: number, horas_extras?: number){
     funcionario.funcionario.salarioHoraExtra = funcionario.calculaHoraExtra(salario_bruto, horas_extras);
     funcionario.funcionario.descontoInss = funcionario.calculaInss(funcionario.funcionario.salarioHoraExtra);
-    funcionario.funcionario.descontoIr = funcionario.calculaIR(funcionario.funcionario.salarioHoraExtra);
+    funcionario.funcionario.descontoIr = funcionario.calculaIR(funcionario.funcionario.salarioHoraExtra - funcionario.funcionario.descontoInss);
     funcionario.funcionario.salarioLiquido = funcionario.calculaSalarioLiquido(
         funcionario.funcionario.salarioHoraExtra, 
         funcionario.funcionario.descontoInss, 
